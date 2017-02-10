@@ -15,7 +15,6 @@ import jade.domain.FIPAException;
 
 /**
  *
- * @author pedroj
  */
 public class AgenteDemo extends Agent {
     private AgenteDemoJFrame myGui;

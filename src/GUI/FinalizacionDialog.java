@@ -8,8 +8,7 @@ package GUI;
 import agentes.AgenteDemo;
 
 /**
- *
- * @author pedroj
+ * 
  */
 public class FinalizacionDialog extends javax.swing.JDialog {
     private AgenteDemo myAgent;

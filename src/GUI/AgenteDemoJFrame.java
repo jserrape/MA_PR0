@@ -9,7 +9,6 @@ import agentes.AgenteDemo;
 
 /**
  *
- * @author pedroj
  */
 public class AgenteDemoJFrame extends javax.swing.JFrame {
     private AgenteDemo myAgent;

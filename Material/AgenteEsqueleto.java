@@ -9,6 +9,7 @@ import jade.core.Agent;
 
 /**
  *
+ * @author pedroj
  * Esqueleto de agente para la estructura general que deben tener todos los
  * agentes
  */
