@@ -6,27 +6,49 @@
 package GUI;
 
 import agentes.AgenteDemo;
+import agentes.AgenteEsqueleto;
 
 /**
  *
  */
 public class AgenteDemoJFrame extends javax.swing.JFrame {
     private AgenteDemo myAgent;
+    private String tipo;
+    private AgenteEsqueleto esqueleto;
     private FinalizacionDialog finalizacion;
 
+
+    /**
+     * Creates new form AgenteEsqueleto
+     */
+    public AgenteDemoJFrame(AgenteEsqueleto esq) {
+        initComponents();
+        salidaTexto.setLineWrap(true);
+        this.esqueleto = esq;
+        tipo="esqueleto";
+        this.setTitle(this.esqueleto.getName());
+    }
+    
     /**
      * Creates new form AgenteDemoJFrame
      */
     public AgenteDemoJFrame(AgenteDemo myAgent) {
         initComponents();
         this.myAgent = myAgent;
-        
+        tipo="demo";
         this.setTitle(this.myAgent.getName());
     }
 
     public void presentarSalida (String msg) {
         salidaTexto.append(msg);
     }
+    
+    public void escribir(String texto){
+        salidaTexto.setText(texto);
+        salidaTexto.setWrapStyleWord(true);
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -90,13 +112,27 @@ public class AgenteDemoJFrame extends javax.swing.JFrame {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
-        finalizacion = new FinalizacionDialog(this, true, myAgent);
-        finalizacion.setVisible(true);
+        if(tipo=="demo"){
+            finalizacion = new FinalizacionDialog(this, true, myAgent,this);
+            finalizacion.setVisible(true);
+        }else{
+            if(tipo=="esqueleto"){
+                finalizacion = new FinalizacionDialog(this, true, esqueleto,this);
+                finalizacion.setVisible(true);
+            }
+        }
     }//GEN-LAST:event_formWindowClosing
 
     private void botonFinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonFinActionPerformed
         // TODO add your handling code here:
-        myAgent.doDelete();
+        if(tipo=="demo"){
+            myAgent.doDelete();
+            this.dispose();
+        }else
+            if(tipo=="esqueleto"){
+                esqueleto.doDelete();
+                this.dispose();
+            }
     }//GEN-LAST:event_botonFinActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

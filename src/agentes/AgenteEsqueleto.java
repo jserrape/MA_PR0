@@ -5,6 +5,7 @@
  */
 package agentes;
 
+import GUI.AgenteDemoJFrame;
 import jade.core.Agent;
 
 /**
@@ -14,18 +15,23 @@ import jade.core.Agent;
  */
 public class AgenteEsqueleto extends Agent {
     //Variables del agente
+    private AgenteDemoJFrame myGui;
 
     @Override
     protected void setup() {
        //Inicialización de las variables del agente
        
        //Configuración del GUI
+       myGui = new AgenteDemoJFrame(this);
+       myGui.setVisible(true);
        
        //Registro del agente en las Páginas Amarrillas
        
        //Registro de la Ontología
        
        System.out.println("Se inicia la ejecución del agente: " + this.getName());
+       myGui.presentarSalida("Se inicia la ejecución del agente: " + this.getName()+"\n");
+       
        //Añadir las tareas principales
     }
 
