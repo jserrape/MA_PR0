@@ -40,6 +40,7 @@ public class AgenteEsqueleto extends Agent {
        //Desregristo del agente de las Páginas Amarillas
        
        //Liberación de recursos, incluido el GUI
+       myGui.dispose();
        
        //Despedida
        System.out.println("Finaliza la ejecución del agente: " + this.getName());

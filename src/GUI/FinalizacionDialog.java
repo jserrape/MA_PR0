@@ -99,14 +99,10 @@ public class FinalizacionDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
         if(tipo=="demo"){
             myAgent.doDelete();
-            this.dispose();
-            interfaz.dispose();
         }
         else
             if(tipo=="esqueleto"){
                 esqueleto.doDelete();
-                this.dispose();
-                interfaz.dispose();
             }
     }//GEN-LAST:event_botonFinActionPerformed
 
