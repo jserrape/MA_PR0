@@ -14,31 +14,28 @@ import agentes.AgenteEsqueleto;
 public class FinalizacionDialog extends javax.swing.JDialog {
     private AgenteDemo myAgent;
     private AgenteEsqueleto esqueleto;
-    private AgenteDemoJFrame interfaz;
     private String tipo;
     
     /**
      * Creates new form SalidaDialog
      */
-    public FinalizacionDialog(java.awt.Frame parent, boolean modal, AgenteDemo myAgent,AgenteDemoJFrame inter) {
+    public FinalizacionDialog(java.awt.Frame parent, boolean modal, AgenteDemo myAgent) {
         super(parent, modal);
         initComponents();
         this.myAgent = myAgent;
         this.setTitle("Finalizar " + this.myAgent.getName());
         tipo="demo";
-        interfaz=inter;
     }
     
     /**
      * Creates new form SalidaDialog
      */
-    public FinalizacionDialog(java.awt.Frame parent, boolean modal, AgenteEsqueleto ag,AgenteDemoJFrame inter) {
+    public FinalizacionDialog(java.awt.Frame parent, boolean modal, AgenteEsqueleto ag) {
         super(parent, modal);
         initComponents();
         this.esqueleto = ag;
         this.setTitle("Finalizar " + this.esqueleto.getName());
         tipo="esqueleto";
-        interfaz=inter;
     }
 
     /**
@@ -99,10 +96,12 @@ public class FinalizacionDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
         if(tipo=="demo"){
             myAgent.doDelete();
+            this.dispose();
         }
         else
             if(tipo=="esqueleto"){
                 esqueleto.doDelete();
+                this.dispose();
             }
     }//GEN-LAST:event_botonFinActionPerformed
 

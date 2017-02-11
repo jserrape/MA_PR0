@@ -113,11 +113,11 @@ public class AgenteDemoJFrame extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
         if(tipo=="demo"){
-            finalizacion = new FinalizacionDialog(this, true, myAgent,this);
+            finalizacion = new FinalizacionDialog(this, true, myAgent);
             finalizacion.setVisible(true);
         }else{
             if(tipo=="esqueleto"){
-                finalizacion = new FinalizacionDialog(this, true, esqueleto,this);
+                finalizacion = new FinalizacionDialog(this, true, esqueleto);
                 finalizacion.setVisible(true);
             }
         }
@@ -127,11 +127,9 @@ public class AgenteDemoJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(tipo=="demo"){
             myAgent.doDelete();
-            this.dispose();
         }else
             if(tipo=="esqueleto"){
                 esqueleto.doDelete();
-                this.dispose();
             }
     }//GEN-LAST:event_botonFinActionPerformed
 
