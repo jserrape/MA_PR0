@@ -7,6 +7,7 @@ package agentes;
 
 import GUI.AgenteDemoJFrame;
 import jade.core.Agent;
+import jade.core.behaviours.TickerBehaviour;
 import jade.domain.DFService;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
@@ -21,12 +22,14 @@ public class AgenteEsqueleto extends Agent {
 
     //Variables del agente
     private AgenteDemoJFrame myGui;
-
+    int ejecuciones;
+    
     @Override
     protected void setup() {
         
         //Inicialización de las variables del agente
-
+        ejecuciones=0;
+        
         //Configuración del GUI
         myGui = new AgenteDemoJFrame(this);
         myGui.setVisible(true);
@@ -52,6 +55,8 @@ public class AgenteEsqueleto extends Agent {
 
         
         //Añadir las tareas principales
+        addBehaviour(new TareaEjemplo(this, 10000));
+        myGui.habilitarCerrado(false);
     }
 
     @Override
@@ -72,4 +77,21 @@ public class AgenteEsqueleto extends Agent {
 
     //Métodos de trabajo del agente
     //Clases internas que representan las tareas del agente
+    public class TareaEjemplo extends TickerBehaviour {
+        //Tarea de ejemplo que se repite cada 10 segundos
+        public TareaEjemplo(Agent a, long period) {
+            super(a, period);
+        }
+
+        @Override
+        protected void onTick() {
+           ejecuciones++;
+           myGui.presentarSalida("\nEjecución número: " + ejecuciones);
+           if(ejecuciones==4){
+               myGui.habilitarCerrado(true);
+               myGui.presentarSalida("\nYa se puede cerrar la interfaz.");
+           } 
+        }
+        
+    }
 }
