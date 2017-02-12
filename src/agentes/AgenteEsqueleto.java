@@ -109,7 +109,12 @@ public class AgenteEsqueleto extends Agent {
         @Override
         protected void onTick() {
             ++ejecuciones2;
-            myGui.presentarSalida("\nEjecución número: " + ejecuciones2 + " de TareaEjercicio");
+            myGui.presentarSalida("\nEjecución número: " + ejecuciones2 + " de TareaEjercicio: ");
+            if(ejecuciones%2==0){
+                secuenciaPar();
+            }else{
+                secuenciaImpar();
+            }
             if(ejecuciones2==10){
                 myGui.presentarSalida("\nAcaba la tarea: TareaEjercicio");
                 removeBehaviour(tareaE);
