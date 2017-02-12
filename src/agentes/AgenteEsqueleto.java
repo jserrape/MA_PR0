@@ -56,7 +56,7 @@ public class AgenteEsqueleto extends Agent {
 
         //Añadir las tareas principales
         addBehaviour(new TareaEjemplo(this, 10000));
-        tareaE=new TareaEjercicio(this, 10000);
+        tareaE = new TareaEjercicio(this, 10000);
         addBehaviour(tareaE);
         myGui.habilitarCerrado(false);
     }
@@ -110,23 +110,40 @@ public class AgenteEsqueleto extends Agent {
         protected void onTick() {
             ++ejecuciones2;
             myGui.presentarSalida("\nEjecución número: " + ejecuciones2 + " de TareaEjercicio: ");
-            if(ejecuciones%2==0){
+            if (ejecuciones % 2 == 0) {
                 secuenciaPar();
-            }else{
+            } else {
                 secuenciaImpar();
             }
-            if(ejecuciones2==10){
+            if (ejecuciones2 == 10) {
                 myGui.presentarSalida("\nAcaba la tarea: TareaEjercicio");
                 removeBehaviour(tareaE);
             }
         }
-        
-        public void secuenciaPar(){
-        
+
+        private void secuenciaPar() {
+            for (int i = 1; i < ejecuciones2+1; i++) {
+                myGui.presentarSalida(i + " ");
+            }
         }
 
-        public void secuenciaImpar(){
-        
+        private void secuenciaImpar() {
+            for (int i = 0; i < ejecuciones2; i++) {
+                myGui.presentarSalida(fibonacci(i) + " ");
+            }
+        }
+
+        private int fibonacci(int n) {
+            if (n > 1) {
+                return fibonacci(n - 1) + fibonacci(n - 2);  //función recursiva
+            } else if (n == 1) {  // caso base
+                return 1;
+            } else if (n == 0) {  // caso base
+                return 0;
+            } else { //error
+                myGui.presentarSalida("Debes ingresar un tamaño mayor o igual a 1");
+                return -1;
+            }
         }
     }
 }
