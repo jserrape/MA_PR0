@@ -17,9 +17,10 @@ import jade.domain.FIPAException;
  *
  */
 public class AgenteDemo extends Agent {
+
     private AgenteDemoJFrame myGui;
     private int ejecuciones;
-    
+
     /**
      * Se ejecuta cuando se inicia el agente
      */
@@ -29,30 +30,27 @@ public class AgenteDemo extends Agent {
         myGui = new AgenteDemoJFrame(this);
         myGui.setVisible(true);
         myGui.presentarSalida("Se inicia la ejecución de " + this.getName() + "\n");
-        
+
         //Incialización de variables
         ejecuciones = 0;
-        
+
         //Registro de la Ontología
-        
         //Registro en Página Amarillas
         DFAgentDescription dfd = new DFAgentDescription();
         dfd.setName(getAID());
-	ServiceDescription sd = new ServiceDescription();
-	sd.setType("Tipo de Servicio");
-	sd.setName("Nombre del Servicio");
-	dfd.addServices(sd);
-	try {
+        ServiceDescription sd = new ServiceDescription();
+        sd.setType("Tipo de Servicio");
+        sd.setName("Nombre del Servicio");
+        dfd.addServices(sd);
+        try {
             DFService.register(this, dfd);
-	}
-	catch (FIPAException fe) {
-            fe.printStackTrace();
-	}
-        
+        } catch (FIPAException fe) {
+        }
+
         // Se añaden las tareas principales
         addBehaviour(new TareaEjemplo(this, 10000));
     }
-    
+
     /**
      * Se ejecuta al finalizar el agente
      */
@@ -61,21 +59,18 @@ public class AgenteDemo extends Agent {
         //Desregistro de las Páginas Amarillas
         try {
             DFService.deregister(this);
-	}
-            catch (FIPAException fe) {
-            fe.printStackTrace();
-	}
-        
+        } catch (FIPAException fe) {
+        }
+
         //Se liberan los recuros y se despide
         myGui.dispose();
         System.out.println("Finaliza la ejecución de " + this.getName());
     }
-    
+
     //Métodos del agente
-    
-    
     //Clases que representan las tareas del agente
     public class TareaEjemplo extends TickerBehaviour {
+
         //Tarea de ejemplo que se repite cada 10 segundos
         public TareaEjemplo(Agent a, long period) {
             super(a, period);
@@ -83,10 +78,10 @@ public class AgenteDemo extends Agent {
 
         @Override
         protected void onTick() {
-           ejecuciones++;
-           myGui.presentarSalida("\nEjecución número: " + ejecuciones);
+            ejecuciones++;
+            myGui.presentarSalida("\nEjecución número: " + ejecuciones);
         }
-        
+
     }
-    
+
 }

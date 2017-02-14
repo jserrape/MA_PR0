@@ -9,33 +9,42 @@ import agentes.AgenteDemo;
 import agentes.AgenteEsqueleto;
 
 /**
- * 
+ *
  */
 public class FinalizacionDialog extends javax.swing.JDialog {
+
     private AgenteDemo myAgent;
     private AgenteEsqueleto esqueleto;
     private String tipo;
-    
+
     /**
      * Creates new form SalidaDialog
+     *
+     * @param parent
+     * @param modal
+     * @param myAgent
      */
     public FinalizacionDialog(java.awt.Frame parent, boolean modal, AgenteDemo myAgent) {
         super(parent, modal);
         initComponents();
         this.myAgent = myAgent;
         this.setTitle("Finalizar " + this.myAgent.getName());
-        tipo="demo";
+        tipo = "demo";
     }
-    
+
     /**
      * Creates new form SalidaDialog
+     *
+     * @param parent
+     * @param modal
+     * @param ag
      */
     public FinalizacionDialog(java.awt.Frame parent, boolean modal, AgenteEsqueleto ag) {
         super(parent, modal);
         initComponents();
         this.esqueleto = ag;
         this.setTitle("Finalizar " + this.esqueleto.getName());
-        tipo="esqueleto";
+        tipo = "esqueleto";
     }
 
     /**
@@ -94,15 +103,13 @@ public class FinalizacionDialog extends javax.swing.JDialog {
 
     private void botonFinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonFinActionPerformed
         // TODO add your handling code here:
-        if(tipo=="demo"){
+        if ("demo".equals(tipo)) {
             myAgent.doDelete();
             this.dispose();
+        } else if ("esqueleto".equals(tipo)) {
+            esqueleto.doDelete();
+            this.dispose();
         }
-        else
-            if(tipo=="esqueleto"){
-                esqueleto.doDelete();
-                this.dispose();
-            }
     }//GEN-LAST:event_botonFinActionPerformed
 
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed

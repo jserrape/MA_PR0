@@ -7,13 +7,12 @@ package agentes;
 
 import GUI.AgenteDemoJFrame;
 import jade.core.Agent;
+import jade.core.behaviours.Behaviour;
 import jade.core.behaviours.TickerBehaviour;
 import jade.domain.DFService;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.domain.FIPAException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -48,7 +47,6 @@ public class AgenteEsqueleto extends Agent {
         try {
             DFService.register(this, dfd);
         } catch (FIPAException fe) {
-            fe.printStackTrace();
         }
 
         //Registro de la Ontología
@@ -56,8 +54,7 @@ public class AgenteEsqueleto extends Agent {
 
         //Añadir las tareas principales
         addBehaviour(new TareaEjemplo(this, 10000));
-        tareaE = new TareaEjercicio(this, 10000);
-        addBehaviour(tareaE);
+        addBehaviour(new TareaEjercicio());
         myGui.habilitarCerrado(false);
     }
 
@@ -67,7 +64,6 @@ public class AgenteEsqueleto extends Agent {
         try {
             DFService.deregister(this);
         } catch (FIPAException fe) {
-            fe.printStackTrace();
         }
 
         //Liberación de recursos, incluido el GUI
@@ -98,31 +94,35 @@ public class AgenteEsqueleto extends Agent {
         }
     }
 
-    public class TareaEjercicio extends TickerBehaviour {
+    public class TareaEjercicio extends Behaviour {
 
-        //Tarea de ejemplo que se repite cada 10 segundos
-        public TareaEjercicio(Agent a, long period) {
-            super(a, period);
+        public TareaEjercicio() {
             myGui.presentarSalida("\nComienza la tarea TareaEjercicio");
         }
 
         @Override
-        protected void onTick() {
+        public boolean done() {
+            if (ejecuciones2 < 10) {
+                return false;
+            } else {
+                myGui.presentarSalida("\nAcaba la tarea: TareaEjercicio");
+                return true;
+            }
+        }
+
+        @Override
+        public void action() {
             ++ejecuciones2;
             myGui.presentarSalida("\nEjecución número: " + ejecuciones2 + " de TareaEjercicio: ");
-            if (ejecuciones % 2 == 0) {
+            if (ejecuciones2 % 2 == 0) {
                 secuenciaPar();
             } else {
                 secuenciaImpar();
             }
-            if (ejecuciones2 == 10) {
-                myGui.presentarSalida("\nAcaba la tarea: TareaEjercicio");
-                removeBehaviour(tareaE);
-            }
         }
 
         private void secuenciaPar() {
-            for (int i = 1; i < ejecuciones2+1; i++) {
+            for (int i = 1; i < ejecuciones2 + 1; i++) {
                 myGui.presentarSalida(i + " ");
             }
         }
@@ -145,5 +145,6 @@ public class AgenteEsqueleto extends Agent {
                 return -1;
             }
         }
+
     }
 }

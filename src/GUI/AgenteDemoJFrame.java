@@ -21,6 +21,8 @@ public class AgenteDemoJFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form AgenteEsqueleto
+     *
+     * @param esq
      */
     public AgenteDemoJFrame(AgenteEsqueleto esq) {
         initComponents();
@@ -33,6 +35,8 @@ public class AgenteDemoJFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form AgenteDemoJFrame
+     *
+     * @param myAgent
      */
     public AgenteDemoJFrame(AgenteDemo myAgent) {
         initComponents();
@@ -119,11 +123,11 @@ public class AgenteDemoJFrame extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
         if (cerrar) {
-            if (tipo == "demo") {
+            if ("demo".equals(tipo)) {
                 finalizacion = new FinalizacionDialog(this, true, myAgent);
                 finalizacion.setVisible(true);
             } else {
-                if (tipo == "esqueleto") {
+                if ("esqueleto".equals(tipo)) {
                     finalizacion = new FinalizacionDialog(this, true, esqueleto);
                     finalizacion.setVisible(true);
                 }
@@ -133,9 +137,9 @@ public class AgenteDemoJFrame extends javax.swing.JFrame {
 
     private void botonFinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonFinActionPerformed
         // TODO add your handling code here:
-        if (tipo == "demo") {
+        if ("demo".equals(tipo)) {
             myAgent.doDelete();
-        } else if (tipo == "esqueleto") {
+        } else if ("esqueleto".equals(tipo)) {
             esqueleto.doDelete();
         }
     }//GEN-LAST:event_botonFinActionPerformed
